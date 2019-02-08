@@ -23,7 +23,12 @@
 			<name>Javaexprience-custom-repo</name>
 			<url>http://maven.javaexperience.eu/</url>
 		</repository>
+		<repository>
+			<id>teavm-dev</id>
+			<url>https://dl.bintray.com/konsoletyper/teavm</url>
+		</repository>
 	</repositories>
+	
 
   <dependencies>
   	<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
@@ -66,6 +71,22 @@
 		<groupId>javaexperience</groupId>
 		<artifactId>transition</artifactId>
 		<version>1.0</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.teavm</groupId>
+		<artifactId>teavm-core</artifactId>
+		<version>0.6.0-dev-600</version>
+	</dependency>
+	<dependency>
+		<groupId>org.teavm</groupId>
+		<artifactId>teavm-classlib</artifactId>
+		<version>0.6.0-dev-600</version>
+	</dependency>
+		<dependency>
+		<groupId>org.teavm</groupId>
+		<artifactId>teavm-tooling</artifactId>
+		<version>0.6.0-dev-600</version>
 	</dependency>
   </dependencies>
 </project>
