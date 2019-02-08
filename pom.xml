@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
 
   <name>teasite</name>
-  <url>http://maven.apache.org</url>
+  <url>http://javaexperience.eu</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -89,4 +89,45 @@
 		<version>0.6.0-dev-600</version>
 	</dependency>
   </dependencies>
+  
+    	<distributionManagement>
+		<repository>
+			<id>localised-repo</id>
+			<url>file:///${user.home}/maven-distribution/</url>
+		</repository>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
+				<configuration>
+				<useSystemClassLoader>false</useSystemClassLoader>
+				</configuration>
+	        	</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+
+					<!-- attached to Maven test phase -->
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
