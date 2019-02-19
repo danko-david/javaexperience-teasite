@@ -4,7 +4,7 @@
 
   <groupId>javaexperience</groupId>
   <artifactId>teasite</artifactId>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
 
   <name>teasite</name>
@@ -76,17 +76,17 @@
 	<dependency>
 		<groupId>org.teavm</groupId>
 		<artifactId>teavm-core</artifactId>
-		<version>0.6.0-dev-600</version>
+		<version>0.5.0-259-gbe21e474</version>
 	</dependency>
 	<dependency>
 		<groupId>org.teavm</groupId>
 		<artifactId>teavm-classlib</artifactId>
-		<version>0.6.0-dev-600</version>
+		<version>0.5.0-259-gbe21e474</version>
 	</dependency>
 		<dependency>
 		<groupId>org.teavm</groupId>
 		<artifactId>teavm-tooling</artifactId>
-		<version>0.6.0-dev-600</version>
+		<version>0.5.0-259-gbe21e474</version>
 	</dependency>
   </dependencies>
   
