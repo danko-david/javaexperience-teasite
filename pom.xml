@@ -4,7 +4,7 @@
 
   <groupId>javaexperience</groupId>
   <artifactId>teasite</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <packaging>jar</packaging>
 
   <name>teasite</name>
@@ -31,13 +31,6 @@
 	
 
   <dependencies>
-  	<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
-	<dependency>
-	    <groupId>joda-time</groupId>
-	    <artifactId>joda-time</artifactId>
-	    <version>2.10</version>
-	</dependency>
-	
 	 <dependency>
 		<groupId>javaexperience</groupId>
 		<artifactId>core</artifactId>
@@ -74,20 +67,11 @@
 	</dependency>
 	
 	<dependency>
-		<groupId>org.teavm</groupId>
-		<artifactId>teavm-core</artifactId>
-		<version>0.5.0-259-gbe21e474</version>
+		<groupId>teavm</groupId>
+		<artifactId>master</artifactId>
+		<version>1.0</version>
 	</dependency>
-	<dependency>
-		<groupId>org.teavm</groupId>
-		<artifactId>teavm-classlib</artifactId>
-		<version>0.5.0-259-gbe21e474</version>
-	</dependency>
-		<dependency>
-		<groupId>org.teavm</groupId>
-		<artifactId>teavm-tooling</artifactId>
-		<version>0.5.0-259-gbe21e474</version>
-	</dependency>
+	
   </dependencies>
   
     	<distributionManagement>
