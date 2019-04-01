@@ -492,6 +492,11 @@ public class SaacEditor
 		}
 	}
 
+	protected static boolean isUsable(Object o)
+	{
+		return null != o && !StringTools.isNullOrTrimEmpty(o.toString());
+	}
+	
 	public void saac_restore_function_arguments(HTMLElement container, DataArray args)
 	{
 		saac_ensure_arguments_container_function_container_count
@@ -512,6 +517,16 @@ public class SaacEditor
 			Object elem = args.get(i);
 			
 			LoggingTools.tryLogFormat(LOG, LogLevel.TRACE, "Restoring argument parameter %d, %s", i, subj, elem);
+			
+			//if requested type is array and id and content not in use
+			if(elem instanceof DataObject)
+			{
+				DataObject obj = (DataObject) elem;
+				if(!isUsable(obj.get("id")) && !isUsable(obj.get("content")) && obj.getArray("args").size() > 0)
+				{
+					elem = obj.getArray("args");
+				}
+			}
 			
 			if(elem instanceof DataArray)
 			{
@@ -892,7 +907,11 @@ public class SaacEditor
 							);
 						}
 					}
-					c.putArray(add);
+					DataObject o = c.newObjectInstance();
+					o.putArray("args", add);
+					o.putString("id", "");
+					o.putString("content", "");
+					c.putObject(o);
 				}
 				else
 				{
