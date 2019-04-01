@@ -70,7 +70,7 @@ public class SaacEditorTools
 			{
 				try
 				{
-					if(StringTools.isNullOrTrimEmpty(data))
+					if(StringTools.isNullOrTrimEmpty(data) || "null".equals(data))
 					{
 						return;
 					}
