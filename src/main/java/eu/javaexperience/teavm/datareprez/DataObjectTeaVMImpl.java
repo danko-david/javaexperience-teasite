@@ -41,6 +41,12 @@ public class DataObjectTeaVMImpl extends DataObjectAbstractImpl
 	{
 		return JSON.stringify(obj).getBytes();
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "DataObjectTeaVM: "+JSON.stringify(obj);
+	}
 
 	@Override
 	public String[] keys()

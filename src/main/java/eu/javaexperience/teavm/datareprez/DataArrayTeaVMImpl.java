@@ -67,6 +67,12 @@ public class DataArrayTeaVMImpl extends DataArrayAbstractImpl implements DataArr
 	{
 		return DataProtocolTeaVMImpl.intance;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "DataArrayTeaVM: "+JSON.stringify(array);
+	}
 
 	@Override
 	public Class getCommonsClass()
