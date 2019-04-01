@@ -456,7 +456,7 @@ public class SaacEditor
 			f_ac = alterTag(f_ac, "textarea");
 		}
 		
-		setContent(f_ac, data.optString("search"));
+		setContent(f_ac, data.optString("content"));
 		
 		if("ta".equals(it))
 		{
@@ -847,7 +847,7 @@ public class SaacEditor
 		DataObject ret = new DataObjectTeaVMImpl();
 		
 		ret.putString("id", ((HTMLInputElement)container.querySelector(".saac_f_function_id")).getValue());
-		ret.putString("search",((HTMLInputElement)container.querySelector(".autocomplete")).getValue());
+		ret.putString("content",((HTMLInputElement)container.querySelector(".autocomplete")).getValue());
 		ret.putString("it", "TEXTAREA".equals(container.querySelector(".autocomplete").getNodeName())?"ta":null);
 		ret.putBoolean("pa", getClassList(container.querySelector(".saac_view_arguments_mode")).contains("glyphicon-resize-horizontal"));
 		
