@@ -6,6 +6,7 @@ import org.teavm.jso.browser.Window;
 import org.teavm.jso.dom.html.HTMLElement;
 import org.teavm.jso.dom.xml.NodeList;
 
+import eu.javaexperience.rpc.client.JvxClientException;
 import eu.javaexperience.teavm.templatesite.common.PageId;
 import eu.javaexperience.teavm.templatesite.common.PageStorage;
 

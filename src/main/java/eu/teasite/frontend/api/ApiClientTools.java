@@ -2,7 +2,7 @@ package eu.teasite.frontend.api;
 
 import eu.javaexperience.interfaces.simple.getBy.GetBy1;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish2;
-import eu.jvx.js.lib.JvxClientException;
+import eu.javaexperience.rpc.client.JvxClientException;
 import eu.jvx.js.lib.ui.FrontendTools;
 
 public class ApiClientTools

@@ -3,7 +3,7 @@ package eu.teasite.frontend.api.transfers;
 import eu.javaexperience.datareprez.DataObject;
 import eu.javaexperience.interfaces.simple.SimpleCall;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish2;
-import eu.jvx.js.lib.JvxClientException;
+import eu.javaexperience.rpc.client.JvxClientException;
 import eu.jvx.js.lib.ui.FrontendTools;
 
 public class PacketTransferTools

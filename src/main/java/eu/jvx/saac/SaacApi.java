@@ -3,7 +3,7 @@ package eu.jvx.saac;
 import eu.javaexperience.datareprez.DataArray;
 import eu.javaexperience.datareprez.DataObject;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish2;
-import eu.jvx.js.lib.JvxClientException;
+import eu.javaexperience.rpc.client.JvxClientException;
 import eu.teasite.frontend.api.ApiInterface;
 
 public class SaacApi extends ApiInterface

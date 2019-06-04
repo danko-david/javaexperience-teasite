@@ -8,9 +8,9 @@ import eu.javaexperience.interfaces.simple.SimpleCall;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish1;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish2;
 import eu.javaexperience.reflect.CastTo;
+import eu.javaexperience.rpc.client.JvxClientException;
 import eu.javaexperience.semantic.references.MayNull;
 import eu.javaexperience.teavm.datareprez.DataObjectTeaVMImpl;
-import eu.jvx.js.lib.JvxClientException;
 import eu.teasite.frontend.api.transfers.ApiPacketTransfer;
 
 public class ApiTransactionCollector extends ApiTransaction

@@ -13,12 +13,12 @@ import eu.javaexperience.interfaces.simple.getBy.GetBy2;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish2;
 import eu.javaexperience.reflect.PrimitiveTools;
 import eu.javaexperience.rpc.RpcFacility;
+import eu.javaexperience.rpc.client.JvxClientException;
 import eu.javaexperience.rpc.codegen.JavaRpcExportTools;
 import eu.javaexperience.rpc.codegen.JavaRpcExportTools.SourceModifierBuilder;
 import eu.javaexperience.rpc.function.JavaFunctionRpcWrapper;
 import eu.javaexperience.rpc.function.RpcFunctionParameter;
 import eu.javaexperience.semantic.references.MayNull;
-import eu.jvx.js.lib.JvxClientException;
 import eu.teasite.frontend.api.ApiInterface;
 
 public class TeaVmApiExporter

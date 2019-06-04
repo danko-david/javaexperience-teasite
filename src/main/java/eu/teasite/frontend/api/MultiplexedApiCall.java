@@ -1,8 +1,8 @@
 package eu.teasite.frontend.api;
 
-import eu.jvx.js.lib.JvxClientException;
 import eu.javaexperience.datareprez.DataObject;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish2;
+import eu.javaexperience.rpc.client.JvxClientException;
 
 public class MultiplexedApiCall extends ApiInterface
 {

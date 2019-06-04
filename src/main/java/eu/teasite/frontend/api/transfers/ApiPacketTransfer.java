@@ -6,7 +6,7 @@ import org.teavm.platform.async.AsyncCallback;
 import eu.javaexperience.datareprez.DataObject;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish1;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish2;
-import eu.jvx.js.lib.JvxClientException;
+import eu.javaexperience.rpc.client.JvxClientException;
 
 public abstract class ApiPacketTransfer
 {
