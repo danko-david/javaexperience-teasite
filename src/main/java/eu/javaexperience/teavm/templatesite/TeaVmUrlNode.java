@@ -8,7 +8,6 @@ import eu.javaexperience.file.AbstractFile;
 import eu.javaexperience.io.IOTools;
 import eu.javaexperience.reflect.Mirror;
 import eu.javaexperience.teavm.TeaVmWebCompiler;
-import eu.javaexperience.teavm.templatesite.frontend.PageStarter;
 import eu.javaexperience.web.MIME;
 import eu.javaexperience.web.dispatch.url.CachedSaltedContentUrlNode;
 import eu.javaexperience.web.dispatch.url.spec.compile.CompilerUrlNode;
@@ -18,10 +17,10 @@ public class TeaVmUrlNode
 	protected boolean isProduction; 
 	protected String tmpDir;
 	protected AbstractFile targetFile;
-	protected Class<? extends PageStarter> masterClass;
+	protected Class<?> masterClass;
 	protected CachedSaltedContentUrlNode scripts;
 	
-	public TeaVmUrlNode(boolean production, String tmpDir, AbstractFile targetFile, Class<? extends PageStarter> masterClass)
+	public TeaVmUrlNode(boolean production, String tmpDir, AbstractFile targetFile, Class<?> masterClass)
 	{
 		this.isProduction = production;
 		this.tmpDir = tmpDir;

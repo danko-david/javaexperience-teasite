@@ -3,8 +3,6 @@ package eu.jvx.js.lib.ui.component.func;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.teavm.tooling.TeaVMTool;
-
 import eu.jvx.js.lib.TeaVmTools;
 
 public abstract class HtmlListContainer<D, E> extends HtmlDataContainer<D>
