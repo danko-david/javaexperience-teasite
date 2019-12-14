@@ -56,7 +56,7 @@ public class TeaVmUrlNode
 			scripts = new CompilerUrlNode
 			(
 				"sitescript.js",
-				new File(tmpDir+"/final_out.js"),
+				new File(null == targetFile?tmpDir+"/final_out.js":targetFile.getUrl()),
 				new TeaVmWebCompiler(masterClass, new File(tmpDir)),
 				production
 			);
