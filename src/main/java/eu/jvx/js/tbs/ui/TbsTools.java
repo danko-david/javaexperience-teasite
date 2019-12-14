@@ -20,6 +20,7 @@ import eu.jvx.js.lib.NativeJsSupport;
 import eu.jvx.js.lib.bindings.H;
 import eu.jvx.js.lib.bindings.VanillaTools;
 import eu.jvx.js.lib.bindings.VanillaTools.ClassList;
+import eu.jvx.js.lib.style.TbsStyle;
 import eu.jvx.js.lib.style.StyleTools.StyleAlaCarte;
 import eu.jvx.js.lib.ui.component.func.HtmlDataContainerTools;
 import eu.jvx.js.lib.ui.component.func.ViewOrEdit;
@@ -253,6 +254,11 @@ public class TbsTools
 
 	public static void modalMessage(String title, String message)
 	{
+		modalMessage(title, message, null);
+	}
+	
+	public static void modalMessage(String title, String message, SimpleCall ok)
+	{
 		H content = H("div"); 
 		content.addChilds(new H("div").attrs("#text", message));
 		
@@ -262,13 +268,51 @@ public class TbsTools
 		
 		H footer = H("div");
 		
-		footer.addChilds(TbsTools.createModalCloseButton("Ok"));
+		HTMLElement okBtn = createModalCloseButton("Ok");
+		if(null != ok)
+		{
+			new H(okBtn).onClick((e)->ok.call());
+		}
+		footer.addChilds(okBtn);
 		
 		TbsTools.modal
 		(
 			header.getHtml(),
 			content.getHtml(),
 			footer.getHtml()
+		);
+	}
+	
+	protected static H buttonify(H elem)
+	{
+		ClassList cl = VanillaTools.getClassList(elem.getHtml());
+		if(!cl.contains("btn"))
+		{
+			elem.style(TbsStyle.BTN_DEFAULT);
+		}
+		
+		return elem;
+	}
+
+	public static void confirmModal
+	(
+		Object title,
+		Object body,
+		Object cancelButton,
+		SimpleCall onCancel,
+		Object acceptButton,
+		SimpleCall onAccept
+	)
+	{
+		modal
+		(
+			VanillaTools.toHtmlElement(title),
+			VanillaTools.toHtmlElement(body),
+			new H("div").addChilds
+			(
+				buttonify(new H(VanillaTools.toHtmlElement(cancelButton)).attrs("data-dismiss", "modal")),
+				buttonify(new H(VanillaTools.toHtmlElement(acceptButton)).onClick((e)->{onAccept.call();closeModal((HTMLElement) e.getTarget());}))
+			).getHtml()
 		);
 	}
 }

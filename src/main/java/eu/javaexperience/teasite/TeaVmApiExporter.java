@@ -19,6 +19,7 @@ import eu.javaexperience.rpc.codegen.JavaRpcExportTools.SourceModifierBuilder;
 import eu.javaexperience.rpc.function.JavaFunctionRpcWrapper;
 import eu.javaexperience.rpc.function.RpcFunctionParameter;
 import eu.javaexperience.semantic.references.MayNull;
+import eu.javaexperience.text.StringTools;
 import eu.teasite.frontend.api.ApiInterface;
 
 public class TeaVmApiExporter
@@ -147,6 +148,11 @@ public class TeaVmApiExporter
 		
 	}
 	
+	public static String filterClassNames(String name)
+	{
+		return StringTools.replaceAllStrings(name, "$", ".");
+	}
+	
 	public static SimplePublish2<StringBuilder, JavaFunctionRpcWrapper> generateTeaVmFunctionGenerator
 	(
 		@MayNull final GetBy1<String, String> mangleReturnType,
@@ -171,6 +177,7 @@ public class TeaVmApiExporter
 					retType = mangleReturnType.getBy(retType);
 				}
 				
+				retType = filterClassNames(retType);
 				
 				sb.append(retType);
 				sb.append(", JvxClientException> callback");
@@ -182,11 +189,11 @@ public class TeaVmApiExporter
 					
 					if(null != mangeParameterType)
 					{
-						sb.append(mangeParameterType.getBy(p));
+						sb.append(filterClassNames(mangeParameterType.getBy(p)));
 					}
 					else
 					{
-						sb.append(p.getTypeFullQualifiedName());
+						sb.append(filterClassNames(p.getTypeFullQualifiedName()));
 					}
 					
 					sb.append(" ");
@@ -211,6 +218,7 @@ public class TeaVmApiExporter
 			}
 		};
 	}
+	
 	
 	public static SimplePublish2<StringBuilder, JavaFunctionRpcWrapper> generateTeaVmFunctionGeneratorBoth
 	(
@@ -237,6 +245,7 @@ public class TeaVmApiExporter
 						retType = mangleReturnType.getBy(retType);
 					}
 					
+					retType = filterClassNames(retType);
 					
 					sb.append(retType);
 					sb.append(", JvxClientException> callback");
@@ -248,11 +257,11 @@ public class TeaVmApiExporter
 						
 						if(null != mangeParameterType)
 						{
-							sb.append(mangeParameterType.getBy(p));
+							sb.append(filterClassNames(mangeParameterType.getBy(p)));
 						}
 						else
 						{
-							sb.append(p.getTypeFullQualifiedName());
+							sb.append(filterClassNames(p.getTypeFullQualifiedName()));
 						}
 						
 						sb.append(" ");
@@ -288,6 +297,8 @@ public class TeaVmApiExporter
 						retType = mangleReturnType.getBy(retType);
 					}
 					
+					retType = filterClassNames(retType);
+					
 					if(retType.equals("Void"))
 					{
 						retType = "void";
@@ -307,11 +318,11 @@ public class TeaVmApiExporter
 						
 						if(null != mangeParameterType)
 						{
-							sb.append(mangeParameterType.getBy(p));
+							sb.append(filterClassNames(mangeParameterType.getBy(p)));
 						}
 						else
 						{
-							sb.append(p.getTypeFullQualifiedName());
+							sb.append(filterClassNames(p.getTypeFullQualifiedName()));
 						}
 						
 						sb.append(" ");

@@ -50,17 +50,12 @@ public class ResultTableGenerator<E>
 	
 	public SimplePublish1<List<TableField<E>>> getFields;
 	
+	public SimplePublish1<List<TableField<E>>> modifyFields;
+	
 	public static final GetBy1<GetBy1<HTMLElement, TableField>, TableField> RENDERER_GETTER_BEFORE_HEADER = (tf)-> tf.renderBeforeHeader;
 	public static final GetBy1<GetBy1<HTMLElement, TableField>, TableField> RENDERER_GETTER_LABEL = (tf)-> tf.renderLabel;
 	public static final GetBy1<GetBy1<HTMLElement, TableField>, TableField> RENDERER_GETTER_VERY_FRIST = (tf)-> tf.renderVeryFirst;
 	public static final GetBy1<GetBy1<HTMLElement, TableField>, TableField> RENDERER_GETTER_LAST = (tf)-> tf.renderLast;
-	
-	/*
-	 HTMLElement ret = table.getHtml();
-	ClassList cl = VanillaTools.getClassList(ret);
-	cl.add("table");
-	cl.add("table-responsive");
-	 */
 	
 	public GeneratedResultTable<E> generate(TableStructureManager tsm, Iterable<E> elements)
 	{
@@ -68,6 +63,11 @@ public class ResultTableGenerator<E>
 		
 		ArrayList<TableField<E>> fds = new ArrayList<>();
 		getFields.publish(fds);
+		
+		if(null != modifyFields)
+		{
+			modifyFields.publish(fds);
+		}
 		
 		{
 			ArrayList<String> fields = new ArrayList<>();
@@ -84,24 +84,10 @@ public class ResultTableGenerator<E>
 		renderRowWithGenerator(table, fds, RENDERER_GETTER_LABEL);
 		renderRowWithGenerator(table, fds, RENDERER_GETTER_VERY_FRIST);
 		
+		for(E elem: elements)
 		{
-			for(E elem: elements)
-			{
-				System.out.println("current element: "+elem);
-				TableRow head = table.createRow("row");
-				for(TableField<E> fd:fds)
-				{
-					if(null != fd.renderField)
-					{
-						HTMLElement add = fd.renderField.getBy(fd, head, elem);
-						if(null != add)
-						{
-							String key = fd.fieldName;
-							head.getCellByName(key).getHtml().appendChild(add);
-						}
-					}
-				}
-			}
+			TableRow head = table.createRow("row");
+			ResultTableGenerator.updateRow(fds, head, elem);
 		}
 		
 		renderRowWithGenerator(table, fds, RENDERER_GETTER_LAST);
@@ -117,6 +103,24 @@ public class ResultTableGenerator<E>
 		return ret;
 	}
 	
+	public static <E> void updateRow(List<TableField<E>> fields, TableRow head, E elem)
+	{
+		for(TableField<E> fd:fields)
+		{
+			if(null != fd.renderField)
+			{
+				HTMLElement add = fd.renderField.getBy(fd, head, elem);
+				if(null != add)
+				{
+					String key = fd.fieldName;
+					HTMLElement f = head.getCellByName(key).getHtml();
+					f.setInnerHTML("");
+					f.appendChild(add);
+				}
+			}
+		}
+	}
+
 	protected void renderRowWithGenerator(Table table, List<TableField<E>> fds, GetBy1<GetBy1<HTMLElement, TableField>, TableField> rendererGetter)
 	{
 		boolean doRender = false;

@@ -2,7 +2,6 @@ package eu.jvx.js.tbs.ui;
 
 import org.teavm.jso.core.JSArray;
 import org.teavm.jso.dom.html.HTMLElement;
-import org.teavm.jso.dom.xml.NodeList;
 
 import eu.jvx.js.lib.HtmlContainer;
 import eu.jvx.js.lib.ImpTools;

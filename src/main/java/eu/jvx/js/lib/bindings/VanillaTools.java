@@ -570,4 +570,18 @@ public class VanillaTools
 		
 		return ret;
 	}
+
+	public static HTMLElement toHtmlElement(Object o)
+	{
+		if(o instanceof HTMLElement)
+		{
+			return (HTMLElement) o;
+		}
+		else if(o instanceof H)
+		{
+			return ((H) o).getHtml();
+		}
+		
+		return new H("span").attrs("#text", null == o?"":o.toString()).getHtml();
+	}
 }

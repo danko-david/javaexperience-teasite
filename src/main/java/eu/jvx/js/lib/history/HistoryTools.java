@@ -5,7 +5,6 @@ import java.util.Map.Entry;
 
 import org.teavm.jso.browser.Window;
 
-import eu.javaexperience.collection.map.MapTools;
 import eu.javaexperience.collection.map.SmallMap;
 import eu.javaexperience.url.UrlBuilder;
 import eu.javaexperience.url.UrlTools;
@@ -29,7 +28,6 @@ public class HistoryTools
 			GET_PARAMS = new UrlBuilder(get).getParams();
 			PREV_GET = get;
 		}
-		System.out.println(MapTools.toString(GET_PARAMS));
 		return GET_PARAMS;
 	}
 	
@@ -86,5 +84,10 @@ public class HistoryTools
 	public static UrlBuilder getCurrentUrl()
 	{
 		return new UrlBuilder(Window.current().getLocation().getFullURL());
+	}
+
+	public static void go(String url)
+	{
+		Window.current().getLocation().setFullURL(url);
 	}
 }

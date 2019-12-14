@@ -48,7 +48,6 @@ public class PacketTransferTools
 			JvxClientException ex = null;
 			if(null != exc)
 			{
-				System.out.println(exc.getString("message"));
 				throw new JvxClientException(exc.getString("message"), exc.getString("detail"));
 			}
 			
