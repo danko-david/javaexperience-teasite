@@ -1,4 +1,4 @@
-package eu.javaexperience.teavm.templatesite;
+package eu.javaexperience.teavm.url;
 
 import java.io.File;
 import java.io.IOException;
