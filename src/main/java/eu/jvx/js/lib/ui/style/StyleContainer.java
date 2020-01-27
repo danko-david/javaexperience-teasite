@@ -35,6 +35,19 @@ public class StyleContainer implements ImpersonalisedHtml
 		return style.getRules();
 	}
 	
+	public void addStyle(String rule)
+	{
+		style.insertRule(rule, style.getLength());
+	}
+	
+	public void removeRules()
+	{
+		while(0 != style.getLength())
+		{
+			style.deleteRule(0);
+		}
+	}
+	
 	@Override
     public Object getImpersonator()
     {

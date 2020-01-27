@@ -226,7 +226,12 @@ public class H implements JSObject
 		
 		return this;
 	}
-
+	
+	public void clear()
+	{
+		VanillaTools.removeAllChild(e);
+	}
+	
 	public H setVisible(boolean b)
 	{
 		HtmlTools.setVisible(e, b);

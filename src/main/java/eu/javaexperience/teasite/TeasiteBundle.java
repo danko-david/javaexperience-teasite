@@ -86,6 +86,8 @@ public class TeasiteBundle extends JavaClassURLNode
 		{
 			api = null;
 		}
+		
+		this.bundles = bundles;
 	}
 	
 	public void setWebSoftwareBundles(WebSoftwareBundle... sw)
