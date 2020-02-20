@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
 import org.teavm.jso.core.JSArray;
 import org.teavm.jso.core.JSBoolean;
@@ -96,6 +97,26 @@ public class DataProtocolTeaVMImpl implements DataProtocol
 		return CastTo.getCasterForTargetClass(cls).cast(rec);
 	}
 	
+	//source JSNumber because inheritance results strange error: Implicit super constructor JSNumber() is not visible for default constructor. Must define an explicit constructor
+	protected static abstract class JSLongNumber implements JSObject
+	{
+		@JSBody(params = {"number"}, script = "return number;")
+		private static native long longValue(JSLongNumber var0);
+
+		public final long longValue()
+		{
+			return longValue(this);
+		}
+		
+		@JSBody(params = {"number"}, script = "return number;")
+		private static native double doubleValue(JSLongNumber var0);
+		
+		public final double doubleValue()
+		{
+			return doubleValue(this);
+		}
+	}
+	
 	protected static Object receiveObject(JSObject o)
 	{
 		if(null != o)
@@ -105,11 +126,11 @@ public class DataProtocolTeaVMImpl implements DataProtocol
 			switch(jt)
 			{
 				case "Number":	
-					JSNumber num = ((JSNumber)o);
+					JSLongNumber num = ((JSLongNumber)o);
 					double d = num.doubleValue();
 					if(Math.floor(d) == d)
 					{
-						return num.intValue();
+						return num.longValue();
 					}
 					return d;
 				
