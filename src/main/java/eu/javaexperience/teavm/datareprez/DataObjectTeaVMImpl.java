@@ -15,7 +15,7 @@ public class DataObjectTeaVMImpl extends DataObjectAbstractImpl
 {
 	protected static NativeJs JS = NativeJsSupport.getSupport();
 
-	public  static final DataObjectTeaVMImpl INSTANCE = new DataObjectTeaVMImpl();
+	public static final DataObjectTeaVMImpl INSTANCE = new DataObjectTeaVMImpl();
 	
 	protected JSObject obj;
 	

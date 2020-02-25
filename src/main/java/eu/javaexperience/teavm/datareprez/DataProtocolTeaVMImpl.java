@@ -97,26 +97,6 @@ public class DataProtocolTeaVMImpl implements DataProtocol
 		return CastTo.getCasterForTargetClass(cls).cast(rec);
 	}
 	
-	//source JSNumber because inheritance results strange error: Implicit super constructor JSNumber() is not visible for default constructor. Must define an explicit constructor
-	protected static abstract class JSLongNumber implements JSObject
-	{
-		@JSBody(params = {"number"}, script = "return number;")
-		private static native long longValue(JSLongNumber var0);
-
-		public final long longValue()
-		{
-			return longValue(this);
-		}
-		
-		@JSBody(params = {"number"}, script = "return number;")
-		private static native double doubleValue(JSLongNumber var0);
-		
-		public final double doubleValue()
-		{
-			return doubleValue(this);
-		}
-	}
-	
 	protected static Object receiveObject(JSObject o)
 	{
 		if(null != o)
@@ -126,11 +106,11 @@ public class DataProtocolTeaVMImpl implements DataProtocol
 			switch(jt)
 			{
 				case "Number":	
-					JSLongNumber num = ((JSLongNumber)o);
+					JSNumber num = ((JSNumber)o);
 					double d = num.doubleValue();
 					if(Math.floor(d) == d)
 					{
-						return num.longValue();
+						return num.intValue();
 					}
 					return d;
 				
