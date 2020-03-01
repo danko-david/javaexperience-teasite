@@ -81,7 +81,8 @@ public class VanillaTools
 	{
 		switch(vn.getNodeName())
 		{
-			case "OPTION":
+			case "SELECT":
+			
 				//select option
 				JSArray<HTMLElement> opts = VanillaTools.getChildren(vn);
 				for(int i=0;i<opts.getLength();++i)
@@ -97,7 +98,8 @@ public class VanillaTools
 					}
 				}
 				break;
-				
+			
+			case "OPTION":
 			case "INPUT":
 				if("checkbox".equals(vn.getAttribute("type")))
 				{
