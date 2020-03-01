@@ -18,6 +18,8 @@ import org.teavm.jso.dom.xml.Element;
 import org.teavm.jso.dom.xml.Node;
 import org.teavm.jso.dom.xml.NodeList;
 
+import eu.javaexperience.reflect.CastTo;
+import eu.javaexperience.reflect.Mirror;
 import eu.javaexperience.text.StringTools;
 import eu.jvx.js.lib.NativeJsSupport;
 import eu.jvx.js.lib.resource.FrontendResourceTools;
@@ -80,16 +82,44 @@ public class VanillaTools
 		switch(vn.getNodeName())
 		{
 			case "OPTION":
-			case "TEXTAREA":
+				//select option
+				JSArray<HTMLElement> opts = VanillaTools.getChildren(vn);
+				for(int i=0;i<opts.getLength();++i)
+				{
+					HTMLElement o = opts.get(i);
+					if(null != val && val.equals(o.getAttribute("value")))
+					{
+						o.setAttribute("selected", "selected");
+					}
+					else
+					{
+						o.removeAttribute("selected");
+					}
+				}
+				break;
+				
 			case "INPUT":
 				if("checkbox".equals(vn.getAttribute("type")))
 				{
+					if(Boolean.TRUE == CastTo.Boolean.cast(val))
+					{
+						vn.setAttribute("checked", "checked");
+					}
+					else
+					{
+						vn.removeAttribute("checked");
+					}
 					return;
 				}
 				
-			((HTMLInputElement)vn).setValue(val);
+				((HTMLInputElement)vn).setValue(val);
 			
-			default: vn.setInnerHTML(val);break;
+				break;
+				
+			case "TEXTAREA":
+			default:
+				vn.setInnerHTML(val);
+			break;
 		}
 	}
 	
