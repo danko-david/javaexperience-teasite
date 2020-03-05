@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.teavm.jso.core.JSArray;
+import org.teavm.jso.dom.html.HTMLDocument;
 import org.teavm.jso.dom.html.HTMLElement;
 import org.teavm.jso.dom.xml.Element;
 import org.teavm.jso.dom.xml.Node;
@@ -17,6 +18,7 @@ import eu.javaexperience.log.Logger;
 import eu.javaexperience.log.LoggingTools;
 import eu.javaexperience.text.StringTools;
 import eu.jvx.js.CustomEvent;
+import eu.jvx.js.lib.bindings.H;
 import eu.jvx.js.lib.bindings.VanillaTools;
 
 public class HtmlTools
@@ -126,7 +128,6 @@ public class HtmlTools
 
 	public static boolean toggleVisiblity(HTMLElement el)
 	{
-		
 		return setVisible(el, !isVisible(el));
 	}
 	
@@ -168,5 +169,25 @@ public class HtmlTools
 				dst.put(name, cont);
 			}
 		}
+	}
+	
+	public static void setPageTitle(String title)
+	{
+		setPageTitle(VanillaTools.getDom(), title);
+	}
+
+	public static void setPageTitle(HTMLDocument document, String title)
+	{
+		H h = null;
+		HTMLElement t = document.querySelector("title");
+		if(null == t)
+		{
+			new H(document.getHead()).addChilds(h = new H("title"));
+		}
+		else
+		{
+			h = new H(t);
+		}
+		h.attrs("#text", title);
 	}
 }

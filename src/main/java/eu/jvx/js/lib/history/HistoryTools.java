@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import org.teavm.jso.browser.Window;
 
 import eu.javaexperience.collection.map.SmallMap;
+import eu.javaexperience.text.StringTools;
 import eu.javaexperience.url.UrlBuilder;
 import eu.javaexperience.url.UrlTools;
 import eu.javaexperience.web.HttpTools;
@@ -89,5 +90,15 @@ public class HistoryTools
 	public static void go(String url)
 	{
 		Window.current().getLocation().setFullURL(url);
+	}
+	
+	public static String getDispatchPath()
+	{
+		String ret = HistoryTools.getPath();
+		if(ret.endsWith("/"))
+		{
+			ret = StringTools.getSubstringBeforeLastString(ret, "/");
+		}
+		return ret;
 	}
 }

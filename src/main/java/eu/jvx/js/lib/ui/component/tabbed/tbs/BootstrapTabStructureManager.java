@@ -14,6 +14,8 @@ import static eu.jvx.js.lib.bindings.VanillaTools.*;
 
 public class BootstrapTabStructureManager implements TabStructureManager
 {
+	public static final BootstrapTabStructureManager DEFAULT_INSTANCE = new BootstrapTabStructureManager();
+	
 	@Override
 	public HTMLElement createTabbedPaneSkel()
 	{

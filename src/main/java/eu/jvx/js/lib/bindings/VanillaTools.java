@@ -19,7 +19,6 @@ import org.teavm.jso.dom.xml.Node;
 import org.teavm.jso.dom.xml.NodeList;
 
 import eu.javaexperience.reflect.CastTo;
-import eu.javaexperience.reflect.Mirror;
 import eu.javaexperience.text.StringTools;
 import eu.jvx.js.lib.NativeJsSupport;
 import eu.jvx.js.lib.resource.FrontendResourceTools;
@@ -77,6 +76,11 @@ public class VanillaTools
 		return ret;
 	}
 
+	public static void setContent(H vn, String val)
+	{
+		setContent(vn.getHtml(), val);
+	}
+	
 	public static void setContent(HTMLElement vn, String val)
 	{
 		switch(vn.getNodeName())
@@ -101,7 +105,7 @@ public class VanillaTools
 			
 			case "OPTION":
 			case "INPUT":
-				if("checkbox".equals(vn.getAttribute("type")))
+				if("checkbox".equals(vn.getAttribute("type")) || "radio".equals(vn.getAttribute("type")))
 				{
 					if(Boolean.TRUE == CastTo.Boolean.cast(val))
 					{
@@ -139,6 +143,11 @@ public class VanillaTools
 		return subject;
 	}
 	
+	public static String getContent(H vn)
+	{
+		return getContent(vn.getHtml());
+	}
+	
 	public static String getContent(HTMLElement vn)
 	{
 		//input: text, checkbox, radio
@@ -160,7 +169,7 @@ public class VanillaTools
 			case "OPTION":
 			case "TEXTAREA":
 			case "INPUT":
-			if("checkbox".equals(vn.getAttribute("type")))
+			if("checkbox".equals(vn.getAttribute("type")) || "radio".equals(vn.getAttribute("type")))
 			{
 				return ((HTMLInputElement)vn).isChecked()?"true":"false";
 			}

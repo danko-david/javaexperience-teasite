@@ -7,7 +7,6 @@ import eu.jvx.js.lib.HtmlTools;
 import eu.jvx.js.lib.ImpTools;
 import eu.jvx.js.lib.ImpersonalisedHtml;
 import eu.jvx.js.lib.bindings.H;
-import eu.jvx.js.lib.bindings.VanillaTools;
 import eu.jvx.js.lib.style.StyleTools.StyleAlaCarte;
 
 public class ViewOrEdit<D> implements ImpersonalisedHtml
