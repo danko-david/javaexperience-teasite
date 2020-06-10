@@ -51,6 +51,7 @@ public class InputContentDemoActivity implements PlaygroundActivity
 		{
 			new H("input").attrs("type", "text"),
 			new H("input").attrs("type", "number"),
+			new H("input").attrs("type", "range", "min", "1", "max", "100"),
 			new H("input").attrs("type", "checkbox", "value", "true"),
 			new H("input").attrs("type", "radio"),
 			sel,

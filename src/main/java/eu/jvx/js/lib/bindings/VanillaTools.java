@@ -20,6 +20,7 @@ import org.teavm.jso.dom.xml.NodeList;
 
 import eu.javaexperience.reflect.CastTo;
 import eu.javaexperience.text.StringTools;
+import eu.jvx.js.interfaces.StyleClassManager;
 import eu.jvx.js.lib.NativeJsSupport;
 import eu.jvx.js.lib.resource.FrontendResourceTools;
 import eu.jvx.js.lib.teavm.NativeJsSupportTeaVM.Direct;
@@ -366,7 +367,7 @@ public class VanillaTools
 		((EtcNodeSupport)(JSObject)elem).setInnerText(content);
 	}
 	
-	public abstract static class ClassList implements JSObject
+	public abstract static class ClassList implements JSObject, StyleClassManager
 	{
 		public abstract boolean contains(String cls);
 		public abstract void add(String cls);

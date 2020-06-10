@@ -1,13 +1,18 @@
 package eu.jvx.js.lib.bindings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.teavm.jso.JSObject;
 import org.teavm.jso.browser.Window;
+import org.teavm.jso.core.JSArray;
 import org.teavm.jso.dom.events.Event;
 import org.teavm.jso.dom.events.EventListener;
 import org.teavm.jso.dom.events.MouseEvent;
 import org.teavm.jso.dom.html.HTMLElement;
 import org.teavm.jso.dom.xml.Node;
 
+import eu.jvx.js.interfaces.StyleClassManager;
 import eu.jvx.js.lib.HtmlTools;
 import eu.jvx.js.lib.ImpTools;
 import eu.jvx.js.lib.ImpersonalisedHtml;
@@ -244,17 +249,19 @@ public class H implements JSObject
 		return this;
 	}
 	
-	/*public H style(StyleClassSource... scs)
+	public StyleClassManager getStyleClasses()
 	{
-		ClassList cl = VanillaTools.getClassList(e);
-		for(StyleClassSource d:scs)
+		return VanillaTools.getClassList(e);
+	}
+	
+	public List<H> listChilds()
+	{
+		List<H> ret = new ArrayList<>();
+		JSArray<HTMLElement> jsa = VanillaTools.getChildren(e);
+		for(int i=0;i<jsa.getLength();++i)
 		{
-			if(null != d)
-			{
-				cl.add(d.getCssClassName());
-			}
+			ret.add(new H(jsa.get(i)));
 		}
-		
-		return this;
-	}*/
+		return ret;
+	}
 }

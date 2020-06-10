@@ -29,6 +29,12 @@ public class ApiClient extends ApiTransaction
 		this.apiStartUrl = startUrl;
 	}
 	
+	public ApiClient(ApiPacketTransfer transfer)
+	{
+		super(transfer);
+		this.apiStartUrl = "";
+	}
+	
 	protected EventMediator<ServerEvent> serverEvents = new EventMediator<ServerEvent>();
 	
 	public EventMediator<ServerEvent> getServerEventManager()
