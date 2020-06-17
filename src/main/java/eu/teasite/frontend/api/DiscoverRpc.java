@@ -9,7 +9,7 @@ public class DiscoverRpc extends ApiInterface implements DiscoverRpcInterface
 	@Override
 	public String[] getNamespaces()
 	{
-		return transfer.transmitSync(pack("getNamespace"));
+		return transfer.transmitSync(pack("getNamespaces"));
 	}
 
 	@Override
