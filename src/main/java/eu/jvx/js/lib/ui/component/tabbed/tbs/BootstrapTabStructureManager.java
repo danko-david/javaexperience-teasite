@@ -90,8 +90,15 @@ public class BootstrapTabStructureManager implements TabStructureManager
 	protected static void switchToActive(HTMLElement elem)
 	{
 		ClassList cl = getClassList(elem);
-		cl.remove("hidden");
-		cl.add("active");
+		for(String s:CLASS_HIDDEN)
+		{
+			cl.remove(s);
+		}
+		
+		for(String s:CLASS_ACTIVE)
+		{
+			cl.add(s);
+		}
 	}
 	
 	protected static final String[] CLASS_ACTIVE = new String[]{"active", "in"};
