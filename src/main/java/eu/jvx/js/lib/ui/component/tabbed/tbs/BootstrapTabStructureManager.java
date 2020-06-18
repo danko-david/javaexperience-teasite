@@ -66,16 +66,23 @@ public class BootstrapTabStructureManager implements TabStructureManager
 		return ent;
 	}
 	
-	protected static void switchClassFrom(HTMLElement root, String select, String cls, @MayNull String to)
+	protected static void switchClassFrom(HTMLElement root, String select, String[] cls, @MayNull String[] to)
 	{
 		NodeList<? extends HTMLElement> lst = root.querySelectorAll(select);
 		for(int i=0;i<lst.getLength();++i)
 		{
 			ClassList cl = getClassList(lst.get(i));
-			cl.remove(cls);
+			for(String s:cls)
+			{
+				cl.remove(s);
+			}
+			
 			if(null != to)
 			{
-				cl.add(to);
+				for(String s:to)
+				{
+					cl.add(s);
+				}
 			}
 		}
 	}
@@ -87,13 +94,17 @@ public class BootstrapTabStructureManager implements TabStructureManager
 		cl.add("active");
 	}
 	
+	protected static final String[] CLASS_ACTIVE = new String[]{"active", "in"};
+	
+	protected static final String[] CLASS_HIDDEN = new String[]{"hidden"};
+	
 	@Override
 	public void setTabIndexActive(HTMLElement structureRoot, int absolutePosition)
 	{
-		switchClassFrom(structureRoot, ".nav-tabs li.active", "active", null);
+		switchClassFrom(structureRoot, ".nav-tabs li.active", CLASS_ACTIVE, null);
 		switchToActive(getChildren(structureRoot.querySelector(".tabed-panel-nav-selector")).get(absolutePosition));
 		
-		switchClassFrom(structureRoot, ".tab-pane", "active", "hidden");
+		switchClassFrom(structureRoot, ".tab-pane", CLASS_ACTIVE, CLASS_HIDDEN);
 		switchToActive(getChildren(structureRoot.querySelector(".tabed-panel-container-selector")).get(absolutePosition));
 	}
 
