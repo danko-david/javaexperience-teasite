@@ -12,7 +12,8 @@ public class PlaygroundApp
 	protected static PlaygroundActivity[] ACTIVITIES =
 	{
 		new InputContentDemoActivity(),
-		new LoggingDemoActivity()
+		new LoggingDemoActivity(),
+		new TabbedPaneDemoActivity()
 	};
 	
 	public static void main(String[] args)

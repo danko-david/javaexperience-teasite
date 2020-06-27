@@ -11,11 +11,14 @@ import org.teavm.jso.dom.events.EventListener;
 import org.teavm.jso.dom.events.MouseEvent;
 import org.teavm.jso.dom.html.HTMLElement;
 import org.teavm.jso.dom.xml.Node;
+import org.teavm.jso.dom.xml.NodeList;
 
 import eu.jvx.js.interfaces.StyleClassManager;
 import eu.jvx.js.lib.HtmlTools;
 import eu.jvx.js.lib.ImpTools;
 import eu.jvx.js.lib.ImpersonalisedHtml;
+import eu.jvx.js.lib.bindings.VanillaTools.ClassList;
+import eu.jvx.js.lib.bindings.VanillaTools.DataSet;
 import eu.jvx.js.lib.style.StyleDecorator;
 import eu.jvx.js.lib.style.StyleDecoratorSource;
 import eu.jvx.js.lib.ui.FrontendTools;
@@ -249,7 +252,7 @@ public class H implements JSObject
 		return this;
 	}
 	
-	public StyleClassManager getStyleClasses()
+	public ClassList getStyleClasses()
 	{
 		return VanillaTools.getClassList(e);
 	}
@@ -263,5 +266,65 @@ public class H implements JSObject
 			ret.add(new H(jsa.get(i)));
 		}
 		return ret;
+	}
+	
+	public DataSet getDataset()
+	{
+		return VanillaTools.getDataSet(e);
+	}
+	
+	public H queryParent(String selector)
+	{
+		return tryWrap(VanillaTools.whereParent(e, selector));
+	}
+	
+	public H queryParentOrThis(String selector)
+	{
+		return tryWrap(VanillaTools.whereParentOrThis(e, selector));
+	}
+	
+	public H queryChild(String selector)
+	{
+		return tryWrap(e.querySelector(selector));
+	}
+	
+	public H queryChildOrThis(String selector)
+	{
+		if(isMatches(selector))
+		{
+			return this;
+		}
+		return queryChild(selector);
+	}
+	
+	public List<H> queryChildAll(String selector)
+	{
+		return tryWrap(e.querySelectorAll(selector));
+	}
+	
+	public boolean isMatches(String selector)
+	{
+		return VanillaTools.is(e, selector);
+	}
+	
+	
+	
+	public static List<H> tryWrap(NodeList<? extends HTMLElement> nodes)
+	{
+		List<H> ret = new ArrayList<>();
+		for(int i=0;i<nodes.getLength();++i)
+		{
+			ret.add(tryWrap(nodes.get(i)));
+		}
+		return ret;
+	}
+	
+	public static H tryWrap(HTMLElement elem)
+	{
+		if(null == elem)
+		{
+			return null;
+		}
+		return new H(elem);
 	}
 }

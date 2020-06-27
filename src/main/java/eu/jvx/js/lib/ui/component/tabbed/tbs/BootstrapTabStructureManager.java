@@ -35,7 +35,7 @@ public class BootstrapTabStructureManager implements TabStructureManager
 		HTMLElement nav = structureRoot.querySelector(".tabed-panel-nav-selector");
 		HTMLElement container = structureRoot.querySelector(".tabed-panel-container-selector");
 		
-		String id = StringTools.randomString(50);
+		String id = "tab_"+StringTools.randomString(50);
 		
 		HTMLElement rn = inlineCreateElement("li");
 		HTMLElement ra = inlineCreateElement("a", "data-toggle", "tab", "href", "#"+id);
