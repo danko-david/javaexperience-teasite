@@ -327,4 +327,29 @@ public class H implements JSObject
 		}
 		return new H(elem);
 	}
+	
+	public static H querySelector(String selector)
+	{
+		return tryWrap(VanillaTools.getDom().querySelector(selector));
+	}
+	
+	public String getContent()
+	{
+		return VanillaTools.getContent(e);
+	}
+	
+	public void setContent(String content)
+	{
+		VanillaTools.setContent(e, content);
+	}
+	
+	public String getAttribute(String attr)
+	{
+		return e.getAttribute(attr);
+	}
+	
+	public String getDomPath()
+	{
+		return VanillaTools.getDomPath(e);
+	}
 }
