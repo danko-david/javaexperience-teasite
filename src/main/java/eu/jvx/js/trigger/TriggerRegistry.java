@@ -1,5 +1,6 @@
 package eu.jvx.js.trigger;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,28 @@ public class TriggerRegistry
 	protected String namespace;
 	
 	protected Map<String, SimplePublish1<DataObject>> triggers = new HashMap<>();
+	
+	protected Map<String, SimplePublish1<DataObject>> ro = Collections.unmodifiableMap(triggers);
+	
+	public void registerTrigger(String name, SimplePublish1<DataObject> handler)
+	{
+		if(triggers.containsKey(name))
+		{
+			throw new RuntimeException("Trigger already exists: "+name);
+		}
+		
+		triggers.put(name, handler);
+	}
+	
+	public void removeTrigger(String name)
+	{
+		triggers.remove(name);
+	}
+	
+	public Map<String, SimplePublish1<DataObject>> getTriggersRo()
+	{
+		return ro;
+	}
 	
 	protected EventListener<Event> listener =  new EventListener<Event>()
 	{
