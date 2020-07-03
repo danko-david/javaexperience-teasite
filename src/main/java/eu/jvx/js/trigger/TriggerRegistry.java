@@ -30,11 +30,6 @@ public class TriggerRegistry
 	
 	protected Map<String, SimplePublish1<DataObject>> ro = Collections.unmodifiableMap(triggers);
 	
-	public TriggerRegistry(String namesapce)
-	{
-		this.namespace = namesapce;
-	}
-	
 	public void registerTrigger(String name, SimplePublish1<DataObject> handler)
 	{
 		if(triggers.containsKey(name))
@@ -81,8 +76,9 @@ public class TriggerRegistry
 		}
 	};
 	
-	public TriggerRegistry()
+	public TriggerRegistry(String namespace)
 	{
+		this.namespace = namespace;
 		VanillaTools.getDom().addEventListener(namespace, listener);
 	}
 	
