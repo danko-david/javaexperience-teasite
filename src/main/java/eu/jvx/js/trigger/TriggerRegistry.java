@@ -30,6 +30,11 @@ public class TriggerRegistry
 	
 	protected Map<String, SimplePublish1<DataObject>> ro = Collections.unmodifiableMap(triggers);
 	
+	public TriggerRegistry(String namesapce)
+	{
+		this.namespace = namesapce;
+	}
+	
 	public void registerTrigger(String name, SimplePublish1<DataObject> handler)
 	{
 		if(triggers.containsKey(name))
