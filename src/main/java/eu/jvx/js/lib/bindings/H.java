@@ -333,6 +333,11 @@ public class H implements JSObject
 		return tryWrap(VanillaTools.getDom().querySelector(selector));
 	}
 	
+	public static List<H> querySelectorAll(String selector)
+	{
+		return tryWrap(VanillaTools.getDom().querySelectorAll(selector));
+	}
+	
 	public String getContent()
 	{
 		return VanillaTools.getContent(e);
