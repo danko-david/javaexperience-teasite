@@ -13,7 +13,8 @@ public class PlaygroundApp
 	{
 		new InputContentDemoActivity(),
 		new LoggingDemoActivity(),
-		new TabbedPaneDemoActivity()
+		new TabbedPaneDemoActivity(),
+		new TestActivity()
 	};
 	
 	public static void main(String[] args)

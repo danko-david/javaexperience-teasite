@@ -110,7 +110,7 @@ public class DataProtocolTeaVMImpl implements DataProtocol
 					double d = num.doubleValue();
 					if(Math.floor(d) == d)
 					{
-						return num.intValue();
+						return (long) d;
 					}
 					return d;
 				
