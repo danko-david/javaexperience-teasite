@@ -48,7 +48,7 @@ public class TeasiteBundle extends JavaClassURLNode
 	)
 	{
 		super(name);
-		
+		this.bundles = bundles;
 		if(null != resourcesDir)
 		{
 			resources = new AttachDirectoryURLNode("resources", resourcesDir, dev);
@@ -86,8 +86,6 @@ public class TeasiteBundle extends JavaClassURLNode
 		{
 			api = null;
 		}
-		
-		this.bundles = bundles;
 	}
 	
 	public void setWebSoftwareBundles(WebSoftwareBundle... sw)

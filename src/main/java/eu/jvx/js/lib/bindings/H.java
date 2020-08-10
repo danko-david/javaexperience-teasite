@@ -353,8 +353,23 @@ public class H implements JSObject
 		return e.getAttribute(attr);
 	}
 	
+	public boolean hasAttribute(String name)
+	{
+		return e.hasAttribute(name);
+	}
+	
 	public String getDomPath()
 	{
 		return VanillaTools.getDomPath(e);
+	}
+	
+	public void remove()
+	{
+		VanillaTools.remove(e);
+	}
+	
+	public H getParent()
+	{
+		return tryWrap((HTMLElement) e.getParentNode());
 	}
 }
