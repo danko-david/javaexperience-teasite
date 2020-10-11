@@ -1,10 +1,12 @@
 package eu.teasite.frontend.api;
 
+import eu.javaexperience.datareprez.DataObject;
 import eu.javaexperience.interfaces.simple.SimpleCall;
 import eu.javaexperience.patterns.behavioral.mediator.EventMediator;
 import eu.javaexperience.semantic.references.MayNull;
 import eu.teasite.frontend.api.transfers.AjaxTransfer;
 import eu.teasite.frontend.api.transfers.ApiPacketTransfer;
+import eu.teasite.frontend.api.transfers.WebSocketTransfer;
 
 /**
  * Creating javascript side RPC solution just wont work:
@@ -21,23 +23,24 @@ import eu.teasite.frontend.api.transfers.ApiPacketTransfer;
  * */
 public class ApiClient extends ApiTransaction
 {
-	protected String apiStartUrl;
-
 	public ApiClient(String startUrl, boolean websocket)
 	{
-		super(websocket?null:new AjaxTransfer(startUrl+"/ajax"));
-		this.apiStartUrl = startUrl;
+		super(websocket?WebSocketTransfer.connectPath(startUrl+"/websocket"):new AjaxTransfer(startUrl+"/ajax"));
+		if(websocket)
+		{
+			WebSocketTransfer wst = (WebSocketTransfer) transfer;
+			wst.setServerEventListener(serverEvents::dispatchEvent);
+		}
 	}
 	
 	public ApiClient(ApiPacketTransfer transfer)
 	{
 		super(transfer);
-		this.apiStartUrl = "";
 	}
 	
-	protected EventMediator<ServerEvent> serverEvents = new EventMediator<ServerEvent>();
+	protected EventMediator<DataObject> serverEvents = new EventMediator<DataObject>();
 	
-	public EventMediator<ServerEvent> getServerEventManager()
+	public EventMediator<DataObject> getServerEventManager()
 	{
 		return serverEvents;
 	}

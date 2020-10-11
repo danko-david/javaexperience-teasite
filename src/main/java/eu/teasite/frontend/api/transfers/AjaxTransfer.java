@@ -6,7 +6,6 @@ import org.teavm.jso.ajax.XMLHttpRequest;
 import org.teavm.jso.json.JSON;
 
 import eu.javaexperience.datareprez.DataObject;
-import eu.javaexperience.interfaces.simple.SimpleCall;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish1;
 import eu.javaexperience.teavm.datareprez.DataObjectTeaVMImpl;
 

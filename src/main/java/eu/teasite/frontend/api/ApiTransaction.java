@@ -61,6 +61,11 @@ public abstract class ApiTransaction
 		return (API) ret;
 	}
 	
+	public ApiPacketTransfer getBackendTransfer()
+	{
+		return transfer;
+	}
+	
 	public abstract void commit(@MayNull SimpleCall onDone);
 
 	public void commit()
