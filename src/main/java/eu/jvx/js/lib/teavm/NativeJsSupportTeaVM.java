@@ -57,7 +57,7 @@ public class NativeJsSupportTeaVM
 		public abstract JSObject callFunction(JSObject func, JSObject param);
 		
 		
-		@JSBody(params = {"p","script"}, script = "var param = p;var ret = eval(script); if(typeof ret === 'string') ret = $rt_str(ret); return ret;")
+		@JSBody(params = {"p","script"}, script = "$rt_globals.param = p;var ret = eval(script); if(typeof ret === 'string') ret = $rt_str(ret); return ret;")
 		public abstract JSObject eval(JSObject param, String script);
 		
 		

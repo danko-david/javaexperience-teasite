@@ -162,20 +162,20 @@ public class TeaVmWebCompiler implements WebCompiler
 				}
 			});
 			
+			t.setObfuscated(false);
+			
 			if(compactize)
 			{
 				t.setDebugInformationGenerated(false);
 				t.setOptimizationLevel(TeaVMOptimizationLevel.FULL);
-				t.setMinifying(true);
+				//t.setMinifying(true);
 			}
 			else
 			{
 				t.setDebugInformationGenerated(true);
 				t.setOptimizationLevel(TeaVMOptimizationLevel.SIMPLE);
-				//t.setOptimizationLevel(null);
-				t.setMinifying(false);
-				//t.setSourceFilesCopied(true);
-				//t.setSourceMapsFileGenerated(true);
+				t.setSourceFilesCopied(true);
+				t.setSourceMapsFileGenerated(true);
 			}
 			
 			t.setClassLoader(Thread.currentThread().getContextClassLoader());

@@ -1,7 +1,7 @@
 package eu.teasite.frontend.api.transfers;
 
 import org.teavm.interop.Async;
-import org.teavm.platform.async.AsyncCallback;
+import org.teavm.interop.AsyncCallback;
 
 import eu.javaexperience.datareprez.DataObject;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish1;

@@ -1,37 +1,11 @@
 package org.teavm.classlib.java.util.concurrent;
 
-import org.teavm.classlib.java.util.TIterator;
 import org.teavm.classlib.java.util.TMap;
-import org.teavm.classlib.java.util.function.TBiConsumer;
 import org.teavm.classlib.java.util.function.TBiFunction;
 import org.teavm.classlib.java.util.function.TFunction;
 
 public interface TConcurrentMap<K, V> extends TMap<K, V>
 {
-	default V getOrDefault(Object key, V defaultValue)
-	{
-		V v;
-		return ((v = get(key)) != null) ? v : defaultValue;
-	}
-
-    default void forEach(TBiConsumer<? super K, ? super V> action) {
-        TIterator<org.teavm.classlib.java.util.TMap.Entry<K, V>> it = this.entrySet().iterator();
-        while(it.hasNext())
-        {
-        	org.teavm.classlib.java.util.TMap.Entry<K, V> entry = it.next();
-            K k;
-            V v;
-            try {
-                k = entry.getKey();
-                v = entry.getValue();
-            } catch(IllegalStateException ise) {
-                // this usually means the entry is no longer in the map.
-                continue;
-            }
-            action.accept(k, v);
-        }
-    }
-
      V putIfAbsent(K key, V value);
 
      boolean remove(Object key, Object value);

@@ -268,6 +268,7 @@ public class Autocomplete<T>
 					HTMLElement elem = VanillaTools.whereParentOrThis(arg0.getTarget().cast(), ".autocomplete-suggestion");
 					if(null != elem)
 					{
+						targetElement.setValue(elem.getAttribute("data-val"));
 						VanillaTools.getClassList(elem).add("selected");
 					}
 				}
@@ -278,14 +279,18 @@ public class Autocomplete<T>
 				@Override
 				public void handleEvent(Event e)
 				{
+					triggerSelectedElement(e);
+					
+					/*
 					HTMLElement elem = VanillaTools.whereParentOrThis(e.getTarget().cast(), ".autocomplete-suggestion");
 					if(null != elem)// else outside click
 					{
 						String v = elem.getAttribute("data-val");
 						targetElement.setValue(v);
-						options.onSelect.publish(e, v, targetElement);
-						sc.getStyle().setProperty("display", "none");
+						
+						selectElement(e, sc, targetElement);
 					}
+					*/
 				}
 			}, sc);
 			
@@ -303,8 +308,6 @@ public class Autocomplete<T>
 					{
 						over_sb = null;
 					}
-					
-					System.out.println("blur: "+(null == over_sb?null:VanillaTools.getDomPath(over_sb)));
 					
 					if(null != over_sb)
 					{
@@ -334,7 +337,7 @@ public class Autocomplete<T>
 			};
 					
 			addEvent(targetElement, "blur", blurHandler);
-
+			
 			final SimplePublish1<List<T>> suggest = new SimplePublish1<List<T>>()
 			{
 				@Override
@@ -405,19 +408,7 @@ public class Autocomplete<T>
 					// enter
 					else if(key == 13 || key == 9)
 					{
-						HTMLElement sel = sc.querySelector(".autocomplete-suggestion.selected");
-						if(null != sel && !sc.getStyle().getPropertyValue("display").equals("none"))
-						{
-							options.onSelect.publish(e, sel.getAttribute("data-val"), sel);
-							Window.setTimeout(new TimerHandler()
-							{
-								@Override
-								public void onTimer()
-								{
-									sc.getStyle().setProperty("display", "none"); 
-								}
-							}, 20);
-						}
+						triggerSelectedElement(e);
 					}
 				}
 			};
@@ -450,7 +441,7 @@ public class Autocomplete<T>
 										{
 											public void run()
 											{
-												options.source.publish(val, suggest);											
+												options.source.publish(val, suggest);
 											};
 										}.start();
 									}
@@ -475,13 +466,22 @@ public class Autocomplete<T>
 				public void handleEvent(Event e)
 				{
 					last_val = "\n";
-					keyupHandler.handleEvent((KeyboardEvent) e);					
+					keyupHandler.handleEvent((KeyboardEvent) e);
 				}
 			};
 					
 			if(options.minChars > 0)
 			{
 				addEvent(targetElement, "focus", focusHandler);
+			}
+		}
+		
+		public void triggerSelectedElement(Event e)
+		{
+			HTMLElement sel = sc.querySelector(".autocomplete-suggestion.selected");
+			if(null != sel && !sc.getStyle().getPropertyValue("display").equals("none"))
+			{
+				selectElement(e, sc, sel);
 			}
 		}
 		
@@ -506,6 +506,19 @@ public class Autocomplete<T>
 			
 			window.getDocument().getBody().removeChild(sc);
 		}
+	}
+	
+	public void selectElement(Event e, HTMLElement container, HTMLElement option)
+	{
+		options.onSelect.publish(e, option.getAttribute("data-val"), option);
+		Window.setTimeout(new TimerHandler()
+		{
+			@Override
+			public void onTimer()
+			{
+				container.getStyle().setProperty("display", "none");
+			}
+		}, 20);
 	}
 	
 	protected static void addEvent(EventTarget el, String type, EventListener<? extends Event> handler)

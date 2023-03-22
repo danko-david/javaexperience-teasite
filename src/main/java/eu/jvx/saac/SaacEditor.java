@@ -791,11 +791,14 @@ public class SaacEditor
 			LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "saac_get_function_by_id(id: %s)", id);
 		}
 		
-		for(DataObject o:saacFunctions)
+		if(null != id)
 		{
-			if(id.equals(o.getString("id")))
+			for(DataObject o:saacFunctions)
 			{
-				return o;
+				if(id.equals(o.getString("id")))
+				{
+					return o;
+				}
 			}
 		}
 		

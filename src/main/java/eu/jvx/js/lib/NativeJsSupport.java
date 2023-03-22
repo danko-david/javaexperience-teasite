@@ -8,7 +8,7 @@ public class NativeJsSupport
 	{
 		if(null == SUPPORT)
 		{
-			throw new RuntimeException("NativeJs suport not set (assing NativeJsSupport.SUPPORT) before botting application");
+			throw new RuntimeException("NativeJs suport not set (assing NativeJsSupport.SUPPORT) before booting application");
 		}
 		
 		return SUPPORT;

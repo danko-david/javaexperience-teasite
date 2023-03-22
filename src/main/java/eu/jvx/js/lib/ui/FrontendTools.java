@@ -43,6 +43,8 @@ public class FrontendTools
 		return serializeInputsInArea(area, DataObjectTeaVMImpl.INSTANCE);
 	}
 	
+	protected static final String CHECK_THREAD = "window.$rt_currentNativeThread";//"window.$rt_resuming && $rt_resuming()";
+	
 	public static DataObject serializeInputsInArea(HTMLElement area, DataCommon proto)
 	{
 		final DataObject obj = proto.newObjectInstance();
@@ -77,7 +79,7 @@ public class FrontendTools
 	
 	public static <T extends Event> void processEventWithThread(EventListener<T> listener, T event)
 	{
-		if(TeaVmTools.isValuable((JSObject) NativeJsSupport.getSupport().eval("$rt_nativeThread()")))
+		if(TeaVmTools.isValuable((JSObject) NativeJsSupport.getSupport().eval(CHECK_THREAD)))
 		{
 			LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "processEventWithThread: dispatch on this thread");
 			listener.handleEvent(event);
@@ -102,19 +104,27 @@ public class FrontendTools
 			@Override
 			public void handleEvent(T arg0)
 			{
-				if(TeaVmTools.isValuable((JSObject) NativeJsSupport.getSupport().eval("$rt_nativeThread()")))
+				if(TeaVmTools.isValuable((JSObject) NativeJsSupport.getSupport().eval(CHECK_THREAD)))
 				{
 					LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "processEventWithThread: dispatch on this thread");
 					listener.handleEvent(arg0);
 				}
 				else
 				{
-					LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "processEventWithThread: dispatch on NEW thread");
+					LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "wrapProcessEventWithThread: dispatch on NEW thread");
 					new Thread()
 					{
 						public void run()
 						{
-							listener.handleEvent(arg0);
+							/*try
+							{*/
+								listener.handleEvent(arg0);
+							/*}
+							catch(Throwable t)
+							{
+								t.printStackTrace();
+								LoggingTools.tryLogFormatException(LOG, LogLevel.WARNING, t, "Exception while dispatching event");
+							}*/
 						};
 					}.start();
 				}
@@ -124,9 +134,9 @@ public class FrontendTools
 
 	public static void runOnThread(SimpleCall simpleCall)
 	{
-		if(TeaVmTools.isValuable((JSObject) NativeJsSupport.getSupport().eval("$rt_nativeThread()")))
+		if(TeaVmTools.isValuable((JSObject) NativeJsSupport.getSupport().eval(CHECK_THREAD)))
 		{
-			LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "processEventWithThread: dispatch on this thread");
+			LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "runOnThread: dispatch on this thread");
 			simpleCall.call();
 		}
 		else
@@ -135,7 +145,7 @@ public class FrontendTools
 			{
 				public void run()
 				{
-					LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "processEventWithThread: dispatch on NEW thread");
+					LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "runOnThread: dispatch on NEW thread");
 					simpleCall.call();
 				};
 			}.start();
@@ -149,14 +159,14 @@ public class FrontendTools
 			@Override
 			public void publish(A a, B b)
 			{
-				if(TeaVmTools.isValuable((JSObject) NativeJsSupport.getSupport().eval("$rt_nativeThread()")))
+				if(TeaVmTools.isValuable((JSObject) NativeJsSupport.getSupport().eval(CHECK_THREAD)))
 				{
-					LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "processEventWithThread: dispatch on this thread");
+					LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "wrapDispatchWithThread: dispatch on this thread");
 					param.publish(a, b);
 				}
 				else
 				{
-					LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "processEventWithThread: dispatch on NEW thread");
+					LoggingTools.tryLogFormat(LOG, LogLevel.DEBUG, "wrapDispatchWithThread: dispatch on NEW thread");
 					new Thread()
 					{
 						public void run()
